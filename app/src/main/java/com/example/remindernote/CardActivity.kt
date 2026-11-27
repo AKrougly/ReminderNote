@@ -39,6 +39,8 @@ class CardActivity : AppCompatActivity() {
         private const val S_END_DATE = "end_date"
         private const val S_STATUS = "status"
         private const val S_STATUS_DATE = "status_date"
+        private const val S_DONE_DATE = "done_date"
+        private const val S_COMPLETED_DATE = "completed_date"
     }
 
     private lateinit var b: ActivityCardBinding
@@ -52,6 +54,8 @@ class CardActivity : AppCompatActivity() {
     private var endDate: LocalDate? = null
     private var status = Status.ACTIVE
     private var statusDate: LocalDate? = null
+    private var doneDate: LocalDate? = null
+    private var completedDate: LocalDate? = null
 
     private val isNew get() = reminderId == -1L
     private val isMonthly get() = b.switchRepeat.isChecked && b.btnMonth.id == b.togglePeriod.checkedButtonId
@@ -88,6 +92,8 @@ class CardActivity : AppCompatActivity() {
             endDate = savedInstanceState.getString(S_END_DATE)?.let(LocalDate::parse)
             status = Status.valueOf(savedInstanceState.getString(S_STATUS) ?: Status.ACTIVE.name)
             statusDate = savedInstanceState.getString(S_STATUS_DATE)?.let(LocalDate::parse)
+            doneDate = savedInstanceState.getString(S_DONE_DATE)?.let(LocalDate::parse)
+            completedDate = savedInstanceState.getString(S_COMPLETED_DATE)?.let(LocalDate::parse)
         } else if (!isNew) {
             val r = ReminderRepository.get(this, reminderId)
             if (r == null) {
@@ -116,6 +122,8 @@ class CardActivity : AppCompatActivity() {
         endDate?.let { outState.putString(S_END_DATE, it.toString()) }
         outState.putString(S_STATUS, status.name)
         statusDate?.let { outState.putString(S_STATUS_DATE, it.toString()) }
+        doneDate?.let { outState.putString(S_DONE_DATE, it.toString()) }
+        completedDate?.let { outState.putString(S_COMPLETED_DATE, it.toString()) }
     }
 
     // ---------- Построение формы ----------
@@ -155,6 +163,8 @@ class CardActivity : AppCompatActivity() {
         endDate = r.endDate
         status = r.status
         statusDate = r.statusDate
+        doneDate = r.doneDate
+        completedDate = r.completedDate
         b.etRemind.setText(r.remindDays.toString())
     }
 
@@ -249,6 +259,10 @@ class CardActivity : AppCompatActivity() {
         b.tvStatusDate.text = getString(
             R.string.status_date_line, statusDate?.format(DATE_FORMAT) ?: getString(R.string.not_set)
         )
+        b.tvDoneDate.text = doneDate?.let { getString(R.string.done_line, it.format(DATE_FORMAT)) }.orEmpty()
+        b.tvDoneDate.visibility = if (doneDate != null) View.VISIBLE else View.GONE
+        b.tvCompletedDate.text = completedDate?.let { getString(R.string.completed_line, it.format(DATE_FORMAT)) }.orEmpty()
+        b.tvCompletedDate.visibility = if (completedDate != null) View.VISIBLE else View.GONE
         // Действия доступны только для сохранённой карточки в режиме просмотра.
         b.groupActions.visibility = if (!isNew && !editing) View.VISIBLE else View.GONE
         b.btnDone.isEnabled = status == Status.ACTIVE || status == Status.OVERDUE
@@ -257,10 +271,18 @@ class CardActivity : AppCompatActivity() {
 
     private fun changeStatus(newStatus: Status) {
         val stored = ReminderRepository.get(this, reminderId) ?: return
-        val updated = stored.copy(status = newStatus, statusDate = LocalDate.now())
+        val today = LocalDate.now()
+        val updated = stored.copy(
+            status = newStatus,
+            statusDate = today,
+            doneDate = if (newStatus == Status.DONE) today else stored.doneDate,
+            completedDate = if (newStatus == Status.COMPLETED) today else stored.completedDate
+        )
         ReminderRepository.save(this, updated)
         status = updated.status
         statusDate = updated.statusDate
+        doneDate = updated.doneDate
+        completedDate = updated.completedDate
         setResult(RESULT_OK, Intent().putExtra(EXTRA_ID, reminderId))
         renderStatus()
         Toast.makeText(
@@ -337,6 +359,8 @@ class CardActivity : AppCompatActivity() {
             remindDays = b.etRemind.text?.toString()?.toIntOrNull() ?: 0,
             status = status,
             statusDate = statusDate,
+            doneDate = doneDate,
+            completedDate = completedDate,
             description = b.etDescription.text?.toString()?.trim().orEmpty()
         )
     }
@@ -369,6 +393,8 @@ class CardActivity : AppCompatActivity() {
         ReminderRepository.save(this, toSave)
         status = toSave.status
         statusDate = toSave.statusDate
+        doneDate = toSave.doneDate
+        completedDate = toSave.completedDate
 
         setResult(RESULT_OK, Intent().putExtra(EXTRA_ID, reminderId).putExtra(EXTRA_ADDED, wasNew))
         if (wasNew) {

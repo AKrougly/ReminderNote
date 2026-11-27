@@ -70,7 +70,9 @@ class ReminderAdapter(
         val extra = listOfNotNull(
             s.remindDate?.takeIf { r.remindDays > 0 }
                 ?.let { ctx.getString(R.string.remind_line, it.format(DATE_FORMAT)) },
-            r.endDate?.let { ctx.getString(R.string.end_line, it.format(DATE_FORMAT)) }
+            r.endDate?.let { ctx.getString(R.string.end_line, it.format(DATE_FORMAT)) },
+            r.doneDate?.let { ctx.getString(R.string.done_line, it.format(DATE_FORMAT)) },
+            r.completedDate?.let { ctx.getString(R.string.completed_line, it.format(DATE_FORMAT)) }
         )
         holder.b.extra.text = extra.joinToString(" · ")
         holder.b.extra.visibility = if (extra.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE

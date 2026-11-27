@@ -72,6 +72,8 @@ object ReminderRepository {
         put("statusDate", r.statusDate?.toString() ?: JSONObject.NULL)
         put("currentExec", r.currentExec?.toString() ?: JSONObject.NULL)
         put("description", r.description)
+        put("doneDate", r.doneDate?.toString() ?: JSONObject.NULL)
+        put("completedDate", r.completedDate?.toString() ?: JSONObject.NULL)
     }
 
     private fun fromJson(o: JSONObject) = Reminder(
@@ -88,6 +90,8 @@ object ReminderRepository {
         status = Status.valueOf(o.optString("status", Status.ACTIVE.name)),
         statusDate = if (o.isNull("statusDate")) null else LocalDate.parse(o.getString("statusDate")),
         currentExec = if (o.isNull("currentExec")) null else LocalDate.parse(o.getString("currentExec")),
-        description = o.optString("description", "")
+        description = o.optString("description", ""),
+        doneDate = if (o.isNull("doneDate")) null else LocalDate.parse(o.getString("doneDate")),
+        completedDate = if (o.isNull("completedDate")) null else LocalDate.parse(o.getString("completedDate"))
     )
 }

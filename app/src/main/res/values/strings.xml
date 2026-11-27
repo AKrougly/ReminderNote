@@ -20,8 +20,8 @@
     <string name="field_period">Период повторения</string>
     <string name="period_month">Месяц</string>
     <string name="period_year">Год</string>
-    <string name="field_exec_date">Дата исполнения</string>
-    <string name="field_exec_day">Число месяца</string>
+    <string name="field_exec_date">Срок</string>
+    <string name="field_exec_day">Срок (число месяца)</string>
     <string name="field_end_date">Дата завершения (необязательно)</string>
     <string name="field_remind_days">За сколько дней напомнить</string>
     <string name="tab_of_card">Вкладка: %1$s</string>
@@ -33,11 +33,11 @@
     <string name="delete_confirm">Удалить эту карточку?</string>
     <string name="cancel">Отмена</string>
     <string name="error_title">Введите событие</string>
-    <string name="error_exec">Укажите дату исполнения</string>
+    <string name="error_exec">Укажите срок</string>
     <string name="not_set">не указана</string>
 
     <!-- Список -->
-    <string name="exec_line">Исполнение: %1$s</string>
+    <string name="exec_line">Срок: %1$s</string>
     <string name="exec_line_ended">Повторы завершены</string>
     <string name="exec_line_none">Дата не указана</string>
     <string name="repeat_month">каждый месяц</string>
@@ -76,4 +76,7 @@
     <string name="repeat_view_month">Повторяется: каждый месяц</string>
     <string name="repeat_view_year">Повторяется: каждый год</string>
     <string name="repeat_view_none">Не повторяется</string>
+
+    <string name="done_line">Исполнено: %1$s</string>
+    <string name="completed_line">Завершено: %1$s</string>
 </resources>

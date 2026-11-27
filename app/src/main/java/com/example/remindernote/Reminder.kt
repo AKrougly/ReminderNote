@@ -32,7 +32,11 @@ data class Reminder(
     /** Для повторяемых: дата исполнения в текущем периоде (хранится, сама не «едет» вперёд). */
     val currentExec: LocalDate? = null,
     /** Краткое содержание события (1–2 строки). */
-    val description: String = ""
+    val description: String = "",
+    /** Дата последнего действия «Исполнить». */
+    val doneDate: LocalDate? = null,
+    /** Дата действия «Завершить». */
+    val completedDate: LocalDate? = null
 )
 
 data class Schedule(
@@ -128,7 +132,7 @@ fun Reminder.recalcStatus(today: LocalDate): Reminder {
             val end = r.endDate
             val changeDay = doneOn.plusDays(1)
             r = if (next == null || (end != null && next.isAfter(end))) {
-                r.copy(status = Status.COMPLETED, statusDate = changeDay)
+                r.copy(status = Status.COMPLETED, statusDate = changeDay, completedDate = changeDay)
             } else {
                 // Для «года» дата исполнения тоже переходит на новый год, чтобы форма показывала актуальную дату.
                 r.copy(
