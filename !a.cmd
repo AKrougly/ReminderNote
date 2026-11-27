@@ -1,0 +1,1 @@
+for %%g in (.) do "C:\Program Files\WinRAR\Rar.exe" a -m5 -s -r -ag-YYYY-MM-DD-HH-MI -x*\.git -x.gitignore -x.eslintcache -x.yarn -x.yarnrc.yml -x*.rar -x*\build -x*\node_modules -xlocal.properties %%~ng%%~xg.rar %%g

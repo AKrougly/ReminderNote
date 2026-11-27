@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">ReminderNote</string>
+
+    <!-- Главный экран -->
+    <string name="tab_all">Все</string>
+    <string name="tab_today">Сегодня</string>
+    <string name="tab_week">Неделя</string>
+    <string name="tab_month">Месяц</string>
+    <string name="tab_year">Год</string>
+    <string name="add_card">Добавить карточку</string>
+    <string name="empty_list">В этой вкладке пока нет карточек.\nНажмите «+», чтобы добавить.</string>
+
+    <!-- Карточка -->
+    <string name="title_new">Новая карточка</string>
+    <string name="title_view">Карточка</string>
+    <string name="title_edit">Редактирование</string>
+    <string name="field_icon">Иконка</string>
+    <string name="field_event">Событие</string>
+    <string name="field_repeat">Повторяющееся событие</string>
+    <string name="field_period">Период повторения</string>
+    <string name="period_month">Месяц</string>
+    <string name="period_year">Год</string>
+    <string name="field_exec_date">Дата исполнения</string>
+    <string name="field_exec_day">Число месяца</string>
+    <string name="field_end_date">Дата завершения (необязательно)</string>
+    <string name="field_remind_days">За сколько дней напомнить</string>
+    <string name="tab_of_card">Вкладка: %1$s</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="clear">Очистить</string>
+    <string name="saved">Сохранено</string>
+    <string name="delete_confirm">Удалить эту карточку?</string>
+    <string name="cancel">Отмена</string>
+    <string name="error_title">Введите событие</string>
+    <string name="error_exec">Укажите дату исполнения</string>
+    <string name="not_set">не указана</string>
+
+    <!-- Список -->
+    <string name="exec_line">Исполнение: %1$s</string>
+    <string name="exec_line_ended">Повторы завершены</string>
+    <string name="exec_line_none">Дата не указана</string>
+    <string name="repeat_month">каждый месяц</string>
+    <string name="repeat_year">каждый год</string>
+    <string name="remind_line">Напомнить: %1$s</string>
+    <string name="end_line">До: %1$s</string>
+    <string name="badge_today">сегодня</string>
+    <string name="badge_in_days">через %1$d дн.</string>
+    <string name="badge_overdue">просрочено</string>
+
+    <!-- Статусы -->
+    <string name="status_active">Действует</string>
+    <string name="status_done">Исполнено</string>
+    <string name="status_overdue">Просрочено</string>
+    <string name="status_completed">Завершено</string>
+    <string name="status_line">Статус: %1$s</string>
+    <string name="status_date_line">Дата смены статуса: %1$s</string>
+    <string name="action_done">Исполнить</string>
+    <string name="action_complete">Завершить</string>
+    <string name="toast_done">Статус: Исполнено</string>
+    <string name="toast_completed">Статус: Завершено</string>
+
+    <!-- Меню главного экрана -->
+    <string name="menu_refresh">Обновить</string>
+    <string name="menu_archive">Архив</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_about">О приложении</string>
+    <string name="refreshed">Статусы обновлены. Изменено карточек: %1$d</string>
+    <string name="empty_archive">В архиве пока нет карточек.</string>
+    <string name="title_archive">Архив</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_about">О приложении</string>
+    <string name="settings_stub">Раздел в разработке</string>
+
+    <string name="field_description">Краткое содержание (1–2 строки)</string>
+    <string name="repeat_view_month">Повторяется: каждый месяц</string>
+    <string name="repeat_view_year">Повторяется: каждый год</string>
+    <string name="repeat_view_none">Не повторяется</string>
+</resources>

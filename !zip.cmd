@@ -1,0 +1,1 @@
+zip -r ..\ReminderNote.zip . -x "*\build\*" "build\*" ".gradle\*" ".idea\*" "*.rar" "*.apk" "*.aab" "local.properties" "*.jks" "*.keystore"
